@@ -10,14 +10,8 @@ export class Hyperledger {
         this.network = network;
     }
 
-    public async invokeChaincode(channel: string, chaincode: string, func: string, params: string[]) {
-        const identity: IIdentity = {
-            cert: org1.credentials.certificate,
-            mspId: org1.mspId
-        }
-        const signer: ISigner = {
-            privateKey: org1.credentials.privateKey
-        }
+    public async invokeChaincode(identity: IIdentity, signer: ISigner, channel: string, chaincode: string, func: string, params: string[]) {
+
         const connectOptions = this.network.newConnectOptions(identity, signer);
         const gateway = connect(connectOptions);
         const network = gateway.getNetwork(channel);
@@ -33,14 +27,8 @@ export class Hyperledger {
         return { result: decodedResult, txId };
     }
 
-    public async queryChaincode(channel: string, chaincode: string, func: string, params: string[]) {
-        const identity: IIdentity = {
-            cert: org1.credentials.certificate,
-            mspId: org1.mspId
-        }
-        const signer: ISigner = {
-            privateKey: org1.credentials.privateKey
-        }
+    public async queryChaincode(identity: IIdentity, signer: ISigner, channel: string, chaincode: string, func: string, params: string[]) {
+
         const connectOptions = this.network.newConnectOptions(identity, signer);
         const gateway = connect(connectOptions);
         const network = gateway.getNetwork(channel);
@@ -49,7 +37,7 @@ export class Hyperledger {
         const result = await contract.evaluateTransaction(func, ...params);
         const decodedResult = this.JSONParse(this.utf8Decoder.decode(result));
         return { result: decodedResult };
-    
+
     }
 
     private JSONParse<T>(data: string): T {

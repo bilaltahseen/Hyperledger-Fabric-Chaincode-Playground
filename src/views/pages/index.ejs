@@ -14,6 +14,19 @@
         <form action="/submit" method="POST" class="mt-3">
             <div class="row">
                 <div class="form-group col-md-6">
+                    <label for="profile">Select Connection Profile:</label>
+                    <select id="profile" name="profile" class="form-control">
+                        <option selected value="connection-org1">connection-org1</option>
+                        <option value="connection-org2">connection-org2</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="org">Select Orgnization:</label>
+                    <select id="org" name="org" class="form-control">
+                        <option selected value="org1">org1</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
                     <label for="channel">Select Channel:</label>
                     <select id="channel" name="channel" class="form-control">
                         <option value="mychannel">mychannel</option>
